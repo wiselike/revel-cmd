@@ -7,9 +7,9 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com/revel/cmd/logger"
-	"github.com/revel/cmd/model"
-	"github.com/revel/cmd/utils"
+	"github.com/wiselike/revel-cmd/logger"
+	"github.com/wiselike/revel-cmd/model"
+	"github.com/wiselike/revel-cmd/utils"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -61,7 +61,7 @@ func newApp(name string, command model.COMMAND, precall func(c *model.CommandCon
 			getOutput, _ := goModCmd.CombinedOutput()
 			fmt.Printf("Calling go mod tidy %s", string(getOutput))
 
-			goModCmd = exec.Command("go", "mod", "edit", "-replace=github.com/revel/revel=github.com/revel/revel@develop")
+			goModCmd = exec.Command("go", "mod", "edit", "-replace=github.com/wiselike/revel=github.com/wiselike/revel@develop")
 			utils.CmdInit(goModCmd, !c.Vendored, c.AppPath)
 			getOutput, _ = goModCmd.CombinedOutput()
 			fmt.Printf("Calling go mod edit %v", string(getOutput))

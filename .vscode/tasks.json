@@ -14,7 +14,7 @@
             "options": {
                 "cwd": "${workspaceRoot}/.temp/revel/testproject"
             },
-            "command": "go mod tidy && go mod edit -replace github.com/revel/revel => ../../../revel"
+            "command": "go mod tidy && go mod edit -replace github.com/wiselike/revel => ../../../revel"
         },
     ]
 } 

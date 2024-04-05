@@ -4,8 +4,8 @@ import (
 	"go/ast"
 	"go/token"
 
-	"github.com/revel/cmd/model"
-	"github.com/revel/cmd/utils"
+	"github.com/wiselike/revel-cmd/model"
+	"github.com/wiselike/revel-cmd/utils"
 )
 
 // Scan app source code for calls to X.Y(), where X is of type *Validation.

@@ -2,7 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/revel/cmd.svg?branch=master)](http://travis-ci.org/revel/cmd) 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Go Report Card](https://goreportcard.com/badge/github.com/revel/cmd)](https://goreportcard.com/report/github.com/revel/cmd)
+[![Go Report Card](https://goreportcard.com/badge/github.com/wiselike/revel-cmd)](https://goreportcard.com/report/github.com/wiselike/revel-cmd)
 
 Provides the `revel` command, used to create and run Revel apps.
 
@@ -11,7 +11,7 @@ Provides the `revel` command, used to create and run Revel apps.
 Install
 ------------
 ```bash
-go install github.com/revel/cmd/revel@latest
+go install github.com/wiselike/revel-cmd/revel@latest
 ```
 
 New Application
@@ -31,13 +31,13 @@ revel new -a my/app
 ## Learn More
 
 * [Manual, Samples, Godocs, etc](http://revel.github.io)
-* [Apps using Revel](https://github.com/revel/revel/wiki/Apps-in-the-Wild)
-* [Articles Featuring Revel](https://github.com/revel/revel/wiki/Articles)
+* [Apps using Revel](https://github.com/wiselike/revel/wiki/Apps-in-the-Wild)
+* [Articles Featuring Revel](https://github.com/wiselike/revel/wiki/Articles)
 
 ## Contributing
 
-* [Contributing Code Guidelines](https://github.com/revel/revel/blob/master/CONTRIBUTING.md)
-* [Revel Contributors](https://github.com/revel/revel/graphs/contributors)
+* [Contributing Code Guidelines](https://github.com/wiselike/revel/blob/master/CONTRIBUTING.md)
+* [Revel Contributors](https://github.com/wiselike/revel/graphs/contributors)
 
 ## Contributors
 

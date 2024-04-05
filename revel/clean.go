@@ -9,8 +9,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/revel/cmd/model"
-	"github.com/revel/cmd/utils"
+	"github.com/wiselike/revel-cmd/model"
+	"github.com/wiselike/revel-cmd/utils"
 )
 
 var cmdClean = &Command{

@@ -32,8 +32,8 @@ github.com/revel/log15 v2.11.20+incompatible h1:JkA4tbwIo/UGEMumY50zndKq816RQW3L
 github.com/revel/log15 v2.11.20+incompatible/go.mod h1:l0WmLRs+IM1hBl4noJiBc2tZQiOgZyXzS1mdmFt+5Gc=
 github.com/revel/pathtree v0.0.0-20140121041023-41257a1839e9 h1:/d6kfjzjyx19ieWqMOXHSTLFuRxLOH15ZubtcAXExKw=
 github.com/revel/pathtree v0.0.0-20140121041023-41257a1839e9/go.mod h1:TmlwoRLDvgRjoTe6rbsxIaka/CulzYrgfef7iNJcEWY=
-github.com/revel/revel v1.1.0 h1:uYJUfhQd4OrCfDcLgE4/XYKWgqqkte4sOLbUQNobgjE=
-github.com/revel/revel v1.1.0/go.mod h1:hv3jPz6e9wppJehS++SrlpJChv4gRhseEwO/Bu4WyCA=
+github.com/wiselike/revel v1.1.0 h1:uYJUfhQd4OrCfDcLgE4/XYKWgqqkte4sOLbUQNobgjE=
+github.com/wiselike/revel v1.1.0/go.mod h1:hv3jPz6e9wppJehS++SrlpJChv4gRhseEwO/Bu4WyCA=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/stretchr/testify v1.7.1 h1:5TQK59W5E3v0r2duFAb7P95B6hEeOyEnHRa8MjYSMTY=

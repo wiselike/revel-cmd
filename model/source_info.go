@@ -7,7 +7,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/revel/cmd/utils"
+	"github.com/wiselike/revel-cmd/utils"
 )
 
 type SourceInfo struct {
@@ -36,7 +36,7 @@ type SourceInfo struct {
 
 // TypesThatEmbed returns all types that (directly or indirectly) embed the
 // target type, which must be a fully qualified type name,
-// e.g. "github.com/revel/revel.Controller".
+// e.g. "github.com/wiselike/revel.Controller".
 func (s *SourceInfo) TypesThatEmbed(targetType, packageFilter string) (filtered []*TypeInfo) {
 	// Do a search in the "embedded type graph", starting with the target type.
 	var (

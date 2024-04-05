@@ -1,4 +1,4 @@
-module github.com/revel/cmd
+module github.com/wiselike/revel-cmd
 
 go 1.17
 
@@ -15,7 +15,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/revel/config v1.1.0
 	github.com/revel/log15 v2.11.20+incompatible
-	github.com/revel/revel v1.1.0
+	github.com/wiselike/revel v1.1.0
 	github.com/stretchr/testify v1.7.1
 	golang.org/x/tools v0.1.10
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0

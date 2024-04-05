@@ -29,11 +29,11 @@ install:
   # Since travis already checks out go build the commandline tool (revel)
   - mkdir $HOME/GOPATH_PROTECTED
   - export GOPATH=$HOME/GOPATH_PROTECTED
-  - go build -o $HOME/gopath/bin/revel github.com/revel/cmd/revel
+  - go build -o $HOME/gopath/bin/revel github.com/wiselike/revel-cmd/revel
   - pwd
   - env
 script:
-  - go test -v github.com/revel/cmd/revel/...
+  - go test -v github.com/wiselike/revel-cmd/revel/...
 
   # Ensure the new-app flow works (plus the other commands).
   #- revel version
@@ -46,13 +46,13 @@ script:
   #- revel package my/testapp prod
 
   # Ensure the new-app flow works (plus the other commands).
-  - revel new     --gomod-flags "edit -replace=github.com/revel/revel=github.com/revel/revel@$REVEL_BRANCH" -a my/testapp2 --package revelframework.com -v
-  - revel test    --gomod-flags "edit -replace=github.com/revel/revel=github.com/revel/revel@$REVEL_BRANCH" -a my/testapp2 -v
-  - revel clean   --gomod-flags "edit -replace=github.com/revel/revel=github.com/revel/revel@$REVEL_BRANCH" -a my/testapp2 -v
-  - revel build   --gomod-flags "edit -replace=github.com/revel/revel=github.com/revel/revel@$REVEL_BRANCH" -a my/testapp2 -v -t build/testapp2
-  - revel build   --gomod-flags "edit -replace=github.com/revel/revel=github.com/revel/revel@$REVEL_BRANCH" -a my/testapp2 -v -t build/testapp2 -m prod
-  - revel package --gomod-flags "edit -replace=github.com/revel/revel=github.com/revel/revel@$REVEL_BRANCH" -a my/testapp2 -v
-  - revel package --gomod-flags "edit -replace=github.com/revel/revel=github.com/revel/revel@$REVEL_BRANCH" -a my/testapp2 -v -m prod
+  - revel new     --gomod-flags "edit -replace=github.com/wiselike/revel=github.com/wiselike/revel@$REVEL_BRANCH" -a my/testapp2 --package revelframework.com -v
+  - revel test    --gomod-flags "edit -replace=github.com/wiselike/revel=github.com/wiselike/revel@$REVEL_BRANCH" -a my/testapp2 -v
+  - revel clean   --gomod-flags "edit -replace=github.com/wiselike/revel=github.com/wiselike/revel@$REVEL_BRANCH" -a my/testapp2 -v
+  - revel build   --gomod-flags "edit -replace=github.com/wiselike/revel=github.com/wiselike/revel@$REVEL_BRANCH" -a my/testapp2 -v -t build/testapp2
+  - revel build   --gomod-flags "edit -replace=github.com/wiselike/revel=github.com/wiselike/revel@$REVEL_BRANCH" -a my/testapp2 -v -t build/testapp2 -m prod
+  - revel package --gomod-flags "edit -replace=github.com/wiselike/revel=github.com/wiselike/revel@$REVEL_BRANCH" -a my/testapp2 -v
+  - revel package --gomod-flags "edit -replace=github.com/wiselike/revel=github.com/wiselike/revel@$REVEL_BRANCH" -a my/testapp2 -v -m prod
 
   - export INITIALWD=$PWD
   # Check build works with no-vendor flag
@@ -63,16 +63,16 @@ script:
 
   # Check non verbose build, outside of GO path
   - cd $INITIALWD
-  - revel new     --gomod-flags "edit -replace=github.com/revel/revel=github.com/revel/revel@$REVEL_BRANCH" -a my/testapp3 --package revelframework.com
-  - revel test    --gomod-flags "edit -replace=github.com/revel/revel=github.com/revel/revel@$REVEL_BRANCH" -a my/testapp3
+  - revel new     --gomod-flags "edit -replace=github.com/wiselike/revel=github.com/wiselike/revel@$REVEL_BRANCH" -a my/testapp3 --package revelframework.com
+  - revel test    --gomod-flags "edit -replace=github.com/wiselike/revel=github.com/wiselike/revel@$REVEL_BRANCH" -a my/testapp3
 
   # Check vendored version of revel
   - cd $INITIALWD
-  - revel new     --gomod-flags "edit -replace=github.com/revel/revel=github.com/revel/revel@$REVEL_BRANCH" -a my/testapp4 --package revelframework.com
+  - revel new     --gomod-flags "edit -replace=github.com/wiselike/revel=github.com/wiselike/revel@$REVEL_BRANCH" -a my/testapp4 --package revelframework.com
   - cd my/testapp4
   - go mod vendor
   - cd ../..
-  - revel test    --gomod-flags "edit -replace=github.com/revel/revel=github.com/revel/revel@$REVEL_BRANCH" -a my/testapp4
+  - revel test    --gomod-flags "edit -replace=github.com/wiselike/revel=github.com/wiselike/revel@$REVEL_BRANCH" -a my/testapp4
 
 matrix:
   allow_failures:

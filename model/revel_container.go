@@ -13,7 +13,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/revel/cmd/utils"
+	"github.com/wiselike/revel-cmd/utils"
 	"github.com/revel/config"
 	"golang.org/x/tools/go/packages"
 )
@@ -129,7 +129,7 @@ func (w *WrappedRevelCallback) PackageResolver(pkgName string) error {
 
 // RevelImportPath Revel framework import path.
 var (
-	RevelImportPath        = "github.com/revel/revel"
+	RevelImportPath        = "github.com/wiselike/revel"
 	RevelModulesImportPath = "github.com/revel/modules"
 )
 
@@ -308,7 +308,7 @@ func (rp *RevelContainer) loadModules(callback RevelCallback) (err error) {
 
 // Adds a module paths to the container object.
 func (rp *RevelContainer) vendorInitilizeLocal(modtxtPath string, revel_modules_keys []string) []*Mod {
-	revel_modules := []string{"github.com/revel/revel"}
+	revel_modules := []string{"github.com/wiselike/revel"}
 	for _, key := range revel_modules_keys {
 		moduleImportPath := rp.Config.StringDefault(key, "")
 		if moduleImportPath == "" {
