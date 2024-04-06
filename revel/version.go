@@ -107,7 +107,7 @@ func (v *VersionCommand) doRepoCheck(updateLibs bool) (versionInfo string, needs
 		case "cmd":
 			title, repo, localVersion = "Revel Cmd", "github.com/wiselike/revel-cmd/revel", v.cmdVersion
 		case "modules":
-			title, repo, localVersion = "Revel Modules", "github.com/revel/modules", v.modulesVersion
+			title, repo, localVersion = "Revel Modules", "github.com/wiselike/revel-modules", v.modulesVersion
 		}
 
 		// Only do an update on the first loop, and if specified to update

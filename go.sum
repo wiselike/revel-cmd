@@ -36,8 +36,8 @@ github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/stretchr/testify v1.7.1 h1:5TQK59W5E3v0r2duFAb7P95B6hEeOyEnHRa8MjYSMTY=
 github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
-github.com/wiselike/revel v1.2.0 h1:WAA2+Ro/A9cp0ax0N3tA16M/HROykVl0GSL2GCVwiJg=
-github.com/wiselike/revel v1.2.0/go.mod h1:hQaUvXFpjbAijtdqJ5qCad7vDBc3WWYV0SBroPnnJA8=
+github.com/wiselike/revel v1.2.1 h1:EMsbETtw4bSBphFGizL8pb0ZP0zxk71okz6BovA+kns=
+github.com/wiselike/revel v1.2.1/go.mod h1:hQaUvXFpjbAijtdqJ5qCad7vDBc3WWYV0SBroPnnJA8=
 github.com/xeonx/timeago v1.0.0-rc5 h1:pwcQGpaH3eLfPtXeyPA4DmHWjoQt0Ea7/++FwpxqLxg=
 github.com/xeonx/timeago v1.0.0-rc5/go.mod h1:qDLrYEFynLO7y5Ho7w3GwgtYgpy5UfhcXIIQvMKVDkA=
 github.com/yuin/goldmark v1.4.13/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=

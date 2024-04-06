@@ -16,7 +16,7 @@ require (
 	github.com/revel/config v1.1.0
 	github.com/revel/log15 v2.11.20+incompatible
 	github.com/stretchr/testify v1.7.1
-	github.com/wiselike/revel v1.2.0
+	github.com/wiselike/revel v1.2.1
 	golang.org/x/tools v0.1.12
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 	gopkg.in/stack.v0 v0.0.0-20141108040640-9b43fcefddd0

@@ -130,7 +130,7 @@ func (w *WrappedRevelCallback) PackageResolver(pkgName string) error {
 // RevelImportPath Revel framework import path.
 var (
 	RevelImportPath        = "github.com/wiselike/revel"
-	RevelModulesImportPath = "github.com/revel/modules"
+	RevelModulesImportPath = "github.com/wiselike/revel-modules"
 )
 
 // This function returns a container object describing the revel application
@@ -401,7 +401,7 @@ func (rp *RevelContainer) addModulePaths(name, importPath, modulePath string) {
 
 	// Hack: There is presently no way for the testrunner module to add the
 	// "test" subdirectory to the CodePaths.  So this does it instead.
-	if importPath == rp.Config.StringDefault("module.testrunner", "github.com/revel/modules/testrunner") {
+	if importPath == rp.Config.StringDefault("module.testrunner", "github.com/wiselike/revel-modules/testrunner") {
 		joinedPath := filepath.Join(rp.BasePath, "tests")
 		rp.CodePaths = append(rp.CodePaths, joinedPath)
 	}
