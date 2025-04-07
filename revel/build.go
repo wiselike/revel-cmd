@@ -24,7 +24,7 @@ This allows it to be deployed and run on a machine that lacks a Go installation.
 
 For example:
 
-    revel build github.com/revel/examples/chat /tmp/chat
+    revel build github.com/wiselike/revel-examples/chat /tmp/chat
 
 `,
 }

@@ -21,7 +21,7 @@ Clean the Revel web application named by the given import path.
 
 For example:
 
-    revel clean github.com/revel/examples/chat
+    revel clean github.com/wiselike/revel-examples/chat
 
 It removes the app/tmp and app/routes directory.
 

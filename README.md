@@ -31,8 +31,8 @@ revel new -a my/app
 ## Learn More
 
 * [Manual, Samples, Godocs, etc](http://revel.github.io)
-* [Apps using Revel](https://github.com/wiselike/revel/wiki/Apps-in-the-Wild)
-* [Articles Featuring Revel](https://github.com/wiselike/revel/wiki/Articles)
+* [Apps using Revel](https://github.com/revel/revel/wiki/Apps-in-the-Wild)
+* [Articles Featuring Revel](https://github.com/revel/revel/wiki/Articles)
 
 ## Contributing
 

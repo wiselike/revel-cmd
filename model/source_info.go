@@ -16,7 +16,7 @@ type SourceInfo struct {
 	StructSpecs []*TypeInfo
 	// ValidationKeys provides a two-level lookup.  The keys are:
 	// 1. The fully-qualified function name,
-	//    e.g. "github.com/revel/examples/chat/app/controllers.(*Application).Action"
+	//    e.g. "github.com/wiselike/revel-examples/chat/app/controllers.(*Application).Action"
 	// 2. Within that func's file, the line number of the (overall) expression statement.
 	//    e.g. the line returned from runtime.Caller()
 	// The result of the lookup the name of variable being validated.

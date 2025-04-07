@@ -34,7 +34,7 @@ const ErrInvalidCommandLine Error = "invalid command line arguments"
 
 const (
 	// RevelCmdImportPath Revel framework cmd tool import path.
-	RevelSkeletonsImportPath = "github.com/revel/skeletons"
+	RevelSkeletonsImportPath = "github.com/wiselike/revel-skeletons"
 
 	// DefaultRunMode for revel's application.
 	DefaultRunMode = "dev"

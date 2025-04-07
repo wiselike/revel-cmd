@@ -28,7 +28,7 @@ Run mode defaults to "dev".
 
 For example:
 
-    revel package github.com/revel/examples/chat
+    revel package github.com/wiselike/revel-examples/chat
 `,
 }
 

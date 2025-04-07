@@ -3,7 +3,7 @@ package model
 // TypeInfo summarizes information about a struct type in the app source code.
 type TypeInfo struct {
 	StructName    string              // e.g. "Application"
-	ImportPath    string              // e.g. "github.com/revel/examples/chat/app/controllers"
+	ImportPath    string              // e.g. "github.com/wiselike/revel-examples/chat/app/controllers"
 	PackageName   string              // e.g. "controllers"
 	MethodSpecs   []*MethodSpec       // Method specifications, the action functions
 	EmbeddedTypes []*EmbeddedTypeName // Used internally to identify controllers that indirectly embed *revel.Controller.

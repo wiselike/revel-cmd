@@ -139,7 +139,7 @@ func (v *VersionCommand) versionFromRepo(repoName, branchName, fileName string) 
 	}
 	// Try to download the version of file from the repo, just use an http connection to retrieve the source
 	// Assuming that the repo is github
-	fullurl := "https://raw.githubusercontent.com/revel/" + repoName + "/" + branchName + "/" + fileName
+	fullurl := "https://raw.githubusercontent.com/wiselike/" + repoName + "/" + branchName + "/" + fileName
 	resp, err := http.Get(fullurl)
 	if err != nil {
 		return

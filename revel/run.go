@@ -23,7 +23,7 @@ Run the Revel web application named by the given import path.
 
 For example, to run the chat room sample application:
 
-    revel run -m dev github.com/revel/examples/chat
+    revel run -m dev github.com/wiselike/revel-examples/chat
 
 The run mode is used to select which set of app.conf configuration should
 apply and may be used to determine logic in the application itself.
@@ -32,7 +32,7 @@ Run mode defaults to "dev".
 
 You can set a port as well.  For example:
 
-    revel run -m prod -p 8080 github.com/revel/examples/chat `,
+    revel run -m prod -p 8080 github.com/wiselike/revel-examples/chat `,
 }
 
 func init() {
