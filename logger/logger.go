@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/revel/config"
+	config "github.com/wiselike/revel-config"
 )
 
 // The LogHandler defines the interface to handle the log records.

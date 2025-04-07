@@ -9,9 +9,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/wiselike/revel-cmd/logger"
-	"github.com/revel/config"
 	"github.com/stretchr/testify/assert"
+	"github.com/wiselike/revel-cmd/logger"
+	config "github.com/wiselike/revel-config"
 )
 
 type (

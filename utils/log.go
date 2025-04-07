@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/wiselike/revel-cmd/logger"
-	"github.com/revel/config"
+	config "github.com/wiselike/revel-config"
 )
 
 var Logger = logger.New()

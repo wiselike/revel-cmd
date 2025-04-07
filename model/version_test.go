@@ -1,10 +1,11 @@
 package model_test
 
 import (
+	"strings"
 	"testing"
 
-	"github.com/wiselike/revel-cmd/model"
 	"github.com/stretchr/testify/assert"
+	"github.com/wiselike/revel-cmd/model"
 )
 
 var versionTests = [][]string{
@@ -14,12 +15,20 @@ var versionTests = [][]string{
 	{"2.0", "2.0.0"},
 }
 
+func getVersion(s string) string {
+	pos := strings.Index(s, "\n")
+	if pos == -1 {
+		return s
+	}
+	return strings.TrimPrefix(s[:pos], "Version: ")
+}
+
 // Test that the event handler can be attached and it dispatches the event received.
 func TestVersion(t *testing.T) {
 	for _, v := range versionTests {
 		p, e := model.ParseVersion(v[0])
 		assert.Nil(t, e, "Should have parsed %s", v)
-		assert.Equal(t, p.String(), v[1], "Should be equal %s==%s", p.String(), v)
+		assert.Equal(t, getVersion(p.String()), v[1], "Should be equal %s==%s", getVersion(p.String()), v)
 	}
 }
 

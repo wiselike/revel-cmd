@@ -14,7 +14,7 @@ import (
 	"unicode"
 
 	"github.com/wiselike/revel-cmd/utils"
-	"github.com/revel/config"
+	config "github.com/wiselike/revel-config"
 	"golang.org/x/tools/go/packages"
 )
 
