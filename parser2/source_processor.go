@@ -62,7 +62,7 @@ func (s *SourceProcessor) parse() (compileError error) {
 	s.sourceInfo.PackageMap = map[string]string{}
 	getImportFromMap := func(packagePath string) string {
 		for path := range s.packageMap {
-			if strings.Index(path, packagePath) == 0 {
+			if path == packagePath || strings.HasPrefix(path, packagePath+"/") {
 				fullPath := s.packageMap[path]
 				return fullPath[:(len(fullPath) - len(path) + len(packagePath))]
 			}
