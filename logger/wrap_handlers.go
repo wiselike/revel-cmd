@@ -9,20 +9,6 @@ import (
 	"time"
 )
 
-// Error is used for constant errors.
-type Error string
-
-// Error implements the error interface.
-func (e Error) Error() string {
-	return string(e)
-}
-
-const (
-	ErrNotFunc   Error = "not a function"
-	ErrTakesArgs Error = "takes arguments"
-	ErrNoReturn  Error = "no return value"
-)
-
 // Function handler wraps the declared function and returns the handler for it.
 func FuncHandler(fn func(r *Record) error) LogHandler {
 	return funcHandler(fn)
@@ -68,11 +54,13 @@ func SyncHandler(h LogHandler) LogHandler {
 // it if you write your own Handler.
 func LazyHandler(h LogHandler) LogHandler {
 	return FuncHandler(func(r *Record) error {
-		for k, v := range r.Context {
+		for k, v := range r.Context.Data {
 			if lz, ok := v.(Lazy); ok {
-				_, err := evaluateLazy(lz)
+				v, err := evaluateLazy(lz)
 				if err != nil {
-					r.Context[errorKey] = "bad lazy " + k
+					r.Context.Add(errorKey, "bad lazy "+k)
+				} else {
+					r.Context.Add(k, v)
 				}
 			}
 		}
@@ -85,27 +73,26 @@ func evaluateLazy(lz Lazy) (interface{}, error) {
 	t := reflect.TypeOf(lz.Fn)
 
 	if t.Kind() != reflect.Func {
-		return nil, fmt.Errorf("%w %+v", ErrNotFunc, lz.Fn)
+		return nil, fmt.Errorf("INVALID_LAZY, not func: %+v", lz.Fn)
 	}
 
 	if t.NumIn() > 0 {
-		return nil, fmt.Errorf("%w %+v", ErrTakesArgs, lz.Fn)
+		return nil, fmt.Errorf("INVALID_LAZY, func takes args: %+v", lz.Fn)
 	}
 
 	if t.NumOut() == 0 {
-		return nil, fmt.Errorf("%w %+v", ErrNoReturn, lz.Fn)
+		return nil, fmt.Errorf("INVALID_LAZY, no func return val: %+v", lz.Fn)
 	}
 
 	value := reflect.ValueOf(lz.Fn)
 	results := value.Call([]reflect.Value{})
 	if len(results) == 1 {
 		return results[0].Interface(), nil
+	} else {
+		values := make([]interface{}, len(results))
+		for i, v := range results {
+			values[i] = v.Interface()
+		}
+		return values, nil
 	}
-
-	values := make([]interface{}, len(results))
-	for i, v := range results {
-		values[i] = v.Interface()
-	}
-
-	return values, nil
 }

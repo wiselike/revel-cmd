@@ -52,9 +52,9 @@ func TerminalFormatHandler(noColor bool, smallDate bool) LogFormat {
 		}
 
 		b := &bytes.Buffer{}
-		caller, _ := r.Context["caller"].(string)
-		module, _ := r.Context["module"].(string)
-		if !noColor && color > 0 {
+		caller, _ := r.Context.Data["caller"].(string)
+		module, _ := r.Context.Data["module"].(string)
+		if noColor == false && color > 0 {
 			if len(module) > 0 {
 				fmt.Fprintf(b, "\x1b[%dm%-5s\x1b[0m %s %6s %13s: %-40s ", color, levelString[r.Level], r.Time.Format(dateFormat), module, caller, r.Message)
 			} else {
@@ -65,7 +65,7 @@ func TerminalFormatHandler(noColor bool, smallDate bool) LogFormat {
 		}
 
 		i := 0
-		for k, v := range r.Context {
+		for _, k := range r.Context.Keys {
 			if i != 0 {
 				b.WriteByte(' ')
 			}
@@ -74,10 +74,10 @@ func TerminalFormatHandler(noColor bool, smallDate bool) LogFormat {
 				continue
 			}
 
-			v := formatLogfmtValue(v)
+			v := formatLogfmtValue(r.Context.Data[k])
 
 			// TODO: we should probably check that all of your key bytes aren't invalid
-			if !noColor && color > 0 {
+			if noColor == false && color > 0 {
 				fmt.Fprintf(b, "\x1b[%dm%s\x1b[0m=%s", color, k, v)
 			} else {
 				b.WriteString(k)
@@ -165,7 +165,7 @@ func escapeString(s string) string {
 			needsEscape = true
 		}
 	}
-	if !needsEscape && !needsQuotes {
+	if needsEscape == false && needsQuotes == false {
 		return s
 	}
 	e := stringBufPool.Get().(*bytes.Buffer)
@@ -197,10 +197,10 @@ func escapeString(s string) string {
 	return ret
 }
 
-// JSONFormatEx formats log records as JSON objects. If pretty is true,
+// JsonFormatEx formats log records as JSON objects. If pretty is true,
 // records will be pretty-printed. If lineSeparated is true, records
 // will be logged with a new line between each record.
-func JSONFormatEx(pretty, lineSeparated bool) LogFormat {
+func JsonFormatEx(pretty, lineSeparated bool) LogFormat {
 	jsonMarshal := json.Marshal
 	if pretty {
 		jsonMarshal = func(v interface{}) ([]byte, error) {
@@ -214,8 +214,8 @@ func JSONFormatEx(pretty, lineSeparated bool) LogFormat {
 		props["t"] = r.Time
 		props["lvl"] = levelString[r.Level]
 		props["msg"] = r.Message
-		for k, v := range r.Context {
-			props[k] = formatJSONValue(v)
+		for _, k := range r.Context.Keys {
+			props[k] = formatJsonValue(r.Context.Data[k])
 		}
 
 		b, err := jsonMarshal(props)
@@ -234,7 +234,7 @@ func JSONFormatEx(pretty, lineSeparated bool) LogFormat {
 	})
 }
 
-func formatJSONValue(value interface{}) interface{} {
+func formatJsonValue(value interface{}) interface{} {
 	value = formatShared(value)
 	switch value.(type) {
 	case int, int8, int16, int32, int64, float32, float64, uint, uint8, uint16, uint32, uint64, string:
