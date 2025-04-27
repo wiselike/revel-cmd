@@ -59,7 +59,7 @@ var singleCases = []testData{
 func TestSingleCases(t *testing.T) {
 	rootLog := logger.New()
 	for _, testCase := range singleCases {
-		testCase.logTest(t, rootLog)
+		testCase.logTest(rootLog, t)
 		testCase.validate(t)
 	}
 }
@@ -112,7 +112,7 @@ var filterCases = []testData{
 func TestFilterCases(t *testing.T) {
 	rootLog := logger.New("module", "app")
 	for _, testCase := range filterCases {
-		testCase.logTest(t, rootLog)
+		testCase.logTest(rootLog, t)
 		testCase.validate(t)
 	}
 }
@@ -169,7 +169,7 @@ var nfilterCases = []testData{
 func TestNotFilterCases(t *testing.T) {
 	rootLog := logger.New("module", "app")
 	for _, testCase := range nfilterCases {
-		testCase.logTest(t, rootLog)
+		testCase.logTest(rootLog, t)
 		testCase.validate(t)
 	}
 }
@@ -186,7 +186,7 @@ var offCases = []testData{
 func TestOffCases(t *testing.T) {
 	rootLog := logger.New("module", "app")
 	for _, testCase := range offCases {
-		testCase.logTest(t, rootLog)
+		testCase.logTest(rootLog, t)
 		testCase.validate(t)
 	}
 }
@@ -203,7 +203,7 @@ var duplicateCases = []testData{
 func TestDuplicateCases(t *testing.T) {
 	rootLog := logger.New("module", "app")
 	for _, testCase := range duplicateCases {
-		testCase.logTest(t, rootLog)
+		testCase.logTest(rootLog, t)
 		testCase.validate(t)
 	}
 }
@@ -232,7 +232,7 @@ var contradictCases = []testData{
 func TestContradictCases(t *testing.T) {
 	rootLog := logger.New("module", "app")
 	for _, testCase := range contradictCases {
-		testCase.logTest(t, rootLog)
+		testCase.logTest(rootLog, t)
 		testCase.validate(t)
 	}
 }
@@ -253,12 +253,12 @@ var allCases = []testData{
 func TestAllCases(t *testing.T) {
 	rootLog := logger.New("module", "app")
 	for i, testCase := range allCases {
-		testCase.logTest(t, rootLog)
+		testCase.logTest(rootLog, t)
 		allCases[i] = testCase
 	}
 	rootLog = logger.New()
 	for i, testCase := range allCases {
-		testCase.logTest(t, rootLog)
+		testCase.logTest(rootLog, t)
 		allCases[i] = testCase
 	}
 	for _, testCase := range allCases {
@@ -284,9 +284,8 @@ func (c *testCounter) Log(r *logger.Record) error {
 	return nil
 }
 
-func (td *testData) logTest(t *testing.T, rootLog logger.MultiLogger) {
+func (td *testData) logTest(rootLog logger.MultiLogger, t *testing.T) {
 	t.Helper()
-
 	if td.tc == nil {
 		td.tc = &testCounter{}
 		counterInit(td.tc)
@@ -319,8 +318,6 @@ func (td *testData) runLogTest(log logger.MultiLogger) {
 }
 
 func (td *testData) validate(t *testing.T) {
-	t.Helper()
-
 	t.Logf("Test %#v expected %#v", td.tc, td.result)
 	assert.Equal(t, td.result.debug, td.tc.debug, "Debug failed "+strings.Join(td.config, " "))
 	assert.Equal(t, td.result.info, td.tc.info, "Info failed "+strings.Join(td.config, " "))

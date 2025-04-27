@@ -143,7 +143,7 @@ const (
 	LvlDebug                 // Debug
 )
 
-// LvlAllList is a list of all the log levels.
+// A list of all the log levels.
 var LvlAllList = []LogLevel{LvlDebug, LvlInfo, LvlWarn, LvlError, LvlCrit}
 
 // Implements the ParentLogHandler.

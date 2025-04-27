@@ -50,8 +50,10 @@ func CallerFileHandler(h LogHandler) LogHandler {
 // Adds in a context called `caller` to the record (contains file name and line number like `foo.go:12`)
 // Uses the `log15.CallerFuncHandler` to perform this task.
 func CallerFuncHandler(h LogHandler) LogHandler {
-	// TODO: infinite recursion
-	return CallerFuncHandler(h)
+	return FuncHandler(func(r *Record) error {
+		r.Context.Add("fn", fmt.Sprintf("%+n", r.Call))
+		return h.Log(r)
+	})
 }
 
 // Filters out records which match the key value pair
@@ -65,18 +67,17 @@ func MatchHandler(key string, value interface{}, h LogHandler) LogHandler {
 // context matches the value. For example, to only log records
 // from your ui package:
 //
-//    log.MatchFilterHandler("pkg", "app/ui", log.StdoutHandler)
-//
+//	log.MatchFilterHandler("pkg", "app/ui", log.StdoutHandler)
 func MatchFilterHandler(key string, value interface{}, h LogHandler) LogHandler {
 	return FilterHandler(func(r *Record) (pass bool) {
-		return r.Context[key] == value
+		return r.Context.Data[key] == value
 	}, h)
 }
 
 // If match then A handler is called otherwise B handler is called.
 func MatchAbHandler(key string, value interface{}, a, b LogHandler) LogHandler {
 	return FuncHandler(func(r *Record) error {
-		if r.Context[key] == value {
+		if r.Context.Data[key] == value {
 			return a.Log(r)
 		} else if b != nil {
 			return b.Log(r)
@@ -108,18 +109,17 @@ func matchMapHandler(matchMap map[string]interface{}, inverse bool, a LogHandler
 	return FuncHandler(func(r *Record) error {
 		matchCount := 0
 		for k, v := range matchMap {
-			value, found := r.Context[k]
+			value, found := r.Context.Data[k]
 			if !found {
 				return nil
 			}
 			// Test for two failure cases
 			if value == v && inverse || value != v && !inverse {
 				return nil
+			} else {
+				matchCount++
 			}
-
-			matchCount++
 		}
-
 		if matchCount != len(matchMap) {
 			return nil
 		}
@@ -131,16 +131,15 @@ func matchMapHandler(matchMap map[string]interface{}, inverse bool, a LogHandler
 // Uses the `log15.FilterHandler` to perform this task.
 func NotMatchHandler(key string, value interface{}, h LogHandler) LogHandler {
 	return FilterHandler(func(r *Record) (pass bool) {
-		return r.Context[key] != value
+		return r.Context.Data[key] != value
 	}, h)
 }
 
 func MultiHandler(hs ...LogHandler) LogHandler {
 	return FuncHandler(func(r *Record) error {
 		for _, h := range hs {
-			if err := h.Log(r); err != nil {
-				panic(err)
-			}
+			// what to do about failures?
+			h.Log(r)
 		}
 		return nil
 	})
@@ -191,7 +190,6 @@ func (ll *ListLogHandler) Log(r *Record) (err error) {
 			handler.Log(r)
 		}
 	}
-
 	return
 }
 
