@@ -89,10 +89,10 @@ func (s *SourceInfoProcessor) processPackage(p *packages.Package) (sourceInfo *m
 // Scan app source code for calls to X.Y(), where X is of type *Validation.
 //
 // Recognize these scenarios:
-// - "Y" = "Validation" and is a member of the receiver.
-//   (The common case for inline validation)
-// - "X" is passed in to the func as a parameter.
-//   (For structs implementing Validated)
+//   - "Y" = "Validation" and is a member of the receiver.
+//     (The common case for inline validation)
+//   - "X" is passed in to the func as a parameter.
+//     (For structs implementing Validated)
 //
 // The line number to which a validation call is attributed is that of the
 // surrounding ExprStmt.  This is so that it matches what runtime.Callers()
@@ -142,25 +142,30 @@ func (s *SourceInfoProcessor) getValidation(funcDecl *ast.FuncDecl, p *packages.
 
 		// Given the validation expression, extract the key.
 		key := callExpr.Args[0]
-		switch expr := key.(type) {
-		case *ast.BinaryExpr:
-			// If the argument is a binary expression, take the first expression.
-			// (e.g. c.Validation.Required(myName != ""))
-			key = expr.X
-		case *ast.UnaryExpr:
-			// If the argument is a unary expression, drill in.
-			// (e.g. c.Validation.Required(!myBool)
-			key = expr.X
-		case *ast.BasicLit:
-			// If it's a literal, skip it.
-			return true
+	expr:
+		for {
+			switch expr := key.(type) {
+			case *ast.BinaryExpr:
+				// If the argument is a binary expression, take the first expression.
+				// (e.g. c.Validation.Required(myName != ""))
+				key = expr.X
+			case *ast.UnaryExpr:
+				// If the argument is a unary expression, drill in.
+				// (e.g. c.Validation.Required(!myBool)
+				key = expr.X
+			case *ast.BasicLit:
+				// If it's a literal, skip it.
+				return true
+			default:
+				break expr
+			}
 		}
 
 		if typeExpr := model.NewTypeExprFromAst("", key); typeExpr.Valid {
 			lineKeys[p.Fset.Position(callExpr.Pos()).Line] = typeExpr.TypeName("")
 		} else {
-			s.sourceProcessor.log.Error("Error: Failed to generate key for field validation. Make sure the field name is valid.", "file", p.PkgPath,
-				"line", p.Fset.Position(callExpr.Pos()).Line, "function", funcDecl.Name.String())
+			s.sourceProcessor.log.Error("Error: Failed to generate key for field validation. Make sure the field name is valid.",
+				"file", p.PkgPath, "location", p.Fset.Position(callExpr.Pos()), "function", funcDecl.Name.String())
 		}
 		return true
 	})
