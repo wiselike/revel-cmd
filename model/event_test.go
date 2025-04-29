@@ -3,8 +3,8 @@ package model_test
 import (
 	"testing"
 
-	"github.com/wiselike/revel"
 	"github.com/stretchr/testify/assert"
+	"github.com/wiselike/revel"
 )
 
 // Test that the event handler can be attached and it dispatches the event received.
