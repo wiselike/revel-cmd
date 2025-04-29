@@ -241,7 +241,7 @@ func (c *CommandConfig) InitPackageResolver() {
 	c.PackageResolver = func(pkgName string) error {
 		utils.Logger.Info("Request for package ", "package", pkgName, "use vendor", c.Vendored)
 		var getCmd *exec.Cmd
-		print("Downloading related packages ...")
+		utils.Logger.Info("Downloading related packages ...")
 		if c.Vendored {
 			getCmd = exec.Command(c.GoCmd, "mod", "tidy", "-v")
 		} else {
@@ -255,7 +255,7 @@ func (c *CommandConfig) InitPackageResolver() {
 		if err != nil {
 			utils.Logger.Error("Failed to import package", "error", err, "gopath", build.Default.GOPATH, "GO-ROOT", build.Default.GOROOT, "output", string(output))
 		}
-		println(" completed.")
+		utils.Logger.Info("PackageResolve completed.")
 
 		return nil
 	}
