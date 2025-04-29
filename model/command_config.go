@@ -241,7 +241,7 @@ func (c *CommandConfig) InitPackageResolver() {
 	c.PackageResolver = func(pkgName string) error {
 		utils.Logger.Info("Request for package ", "package", pkgName, "use vendor", c.Vendored)
 		var getCmd *exec.Cmd
-		print("Downloading related packages ...")
+		utils.Logger.Info("Downloading related packages ...")
 		if c.Vendored {
 			getCmd = exec.Command(c.GoCmd, "mod", "tidy", "-v")
 		} else {
@@ -250,10 +250,11 @@ func (c *CommandConfig) InitPackageResolver() {
 		}
 
 		utils.CmdInit(getCmd, !c.Vendored, c.AppPath)
-		utils.Logger.Info("Go get command ", "exec", getCmd.Path, "dir", getCmd.Dir, "args", getCmd.Args, "env", getCmd.Env, "package", pkgName)
+		utils.Logger.Info("Go get command ", "exec", getCmd.Path, "dir", getCmd.Dir, "args", getCmd.Args, "package", pkgName)
 		output, err := getCmd.CombinedOutput()
 		if err != nil {
-			utils.Logger.Error("Failed to import package", "error", err, "gopath", build.Default.GOPATH, "GO-ROOT", build.Default.GOROOT, "output", string(output))
+			utils.Logger.Error("Failed to import package", "error", err, "gopath", build.Default.GOPATH, "GO-ROOT", build.Default.GOROOT)
+			utils.Logger.Errorf("output: \n%s", string(output))
 		}
 
 		// we shoud check `pkgName` is in go.mod file, when using vendor.
@@ -273,7 +274,7 @@ func (c *CommandConfig) InitPackageResolver() {
 			}
 		}
 
-		println(" completed.")
+		utils.Logger.Info("PackageResolve completed.")
 
 		return nil
 	}

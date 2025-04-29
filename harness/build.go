@@ -219,7 +219,7 @@ func Build(c *model.CommandConfig, paths *model.RevelContainer) (_ *App, err err
 			matches = addPackagePattern.FindAllStringSubmatch(stOutput, -1)
 
 		}
-		utils.Logger.Info("Build failed checking for missing imports", "message", stOutput, "missing_imports", len(matches))
+		utils.Logger.Warn("Build failed checking for missing imports", "message", stOutput, "missing_imports", len(matches))
 		if matches == nil {
 			utils.Logger.Info("Build failed no missing imports", "message", stOutput)
 			return nil, newCompileError(paths, output)
@@ -264,9 +264,10 @@ func Build(c *model.CommandConfig, paths *model.RevelContainer) (_ *App, err err
 
 // Try to define a version string for the compiled app
 // The following is tried (first match returns):
-// - Read a version explicitly specified in the APP_VERSION environment
-//   variable
-// - Read the output of "git describe" if the source is in a git repository
+//   - Read a version explicitly specified in the APP_VERSION environment
+//     variable
+//   - Read the output of "git describe" if the source is in a git repository
+//
 // If no version can be determined, an empty string is returned.
 func getAppVersion(paths *model.RevelContainer) string {
 	if version := os.Getenv("APP_VERSION"); version != "" {

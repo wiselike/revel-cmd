@@ -374,9 +374,9 @@ func findSrcPaths(appPath string, packagesList []string) (sourcePathsmap map[str
 	sourcePathsmap = map[string]string{}
 	Logger.Infof("Environment path %s root %s config env %s", os.Getenv("GOPATH"), os.Getenv("GOROOT"), config.Env)
 
+	Logger.Infof("package.Load(%#v)", packagesList)
 	pkgs, err := packages.Load(config, packagesList...)
-	Logger.Infof("Environment path %s root %s config env %s", os.Getenv("GOPATH"), os.Getenv("GOROOT"), config.Env)
-	Logger.Info("Loaded packages ", "len results", len(pkgs), "error", err, "basedir", appPath)
+	Logger.Info("Loaded packages ", "error", err, "basedir", appPath, "results", pkgs)
 	for _, packageName := range packagesList {
 		found := false
 		log := Logger.New("seeking", packageName)
@@ -384,12 +384,11 @@ func findSrcPaths(appPath string, packagesList []string) (sourcePathsmap map[str
 			log.Info("Found package", "package", pck.ID)
 			if pck.ID == packageName {
 				if pck.Errors != nil && len(pck.Errors) > 0 {
-					log.Error("Error ", "count", len(pck.Errors), "App Import Path", pck.ID, "filesystem path", pck.PkgPath, "errors", pck.Errors)
+					log.Warn("Warn", "count", len(pck.Errors), "App Import Path", pck.ID, "filesystem path", pck.PkgPath, "errors", pck.Errors)
 					// continue
 				}
-				// a,_ := pck.MarshalJSON()
-				log.Info("Found ", "count", len(pck.GoFiles), "App Import Path", pck.ID, "apppath", appPath)
 				if len(pck.GoFiles) > 0 {
+					log.Info("Found", "count", len(pck.GoFiles), "App Import Path", pck.ID, "apppath", appPath)
 					sourcePathsmap[packageName] = filepath.Dir(pck.GoFiles[0])
 					found = true
 				}
