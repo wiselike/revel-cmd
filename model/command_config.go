@@ -278,6 +278,11 @@ func (c *CommandConfig) initGoPaths() {
 	// lookup go path
 	c.GoPath = build.Default.GOPATH
 	if c.GoPath == "" {
+		if home, err := os.UserHomeDir(); err == nil {
+			c.GoPath = filepath.Join(home, "go")
+		}
+	}
+	if c.GoPath == "" {
 		utils.Logger.Fatal("Abort: GOPATH environment variable is not set. " +
 			"Please refer to http://golang.org/doc/code.html to configure your Go environment.")
 	}
