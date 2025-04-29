@@ -19,7 +19,7 @@ func CmdInit(c *exec.Cmd, addGoPath bool, basePath string) {
 }
 
 // ReducedEnv returns a list of environment vairables by using os.Env
-// it will remove the GOPATH, GOROOT if addGoPath is true
+// it will remove the GOPATH, GOROOT if addGoPath is false
 func ReducedEnv(addGoPath bool) []string {
 	realPath := &bytes.Buffer{}
 	env := []string{}

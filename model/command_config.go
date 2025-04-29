@@ -255,6 +255,24 @@ func (c *CommandConfig) InitPackageResolver() {
 		if err != nil {
 			utils.Logger.Error("Failed to import package", "error", err, "gopath", build.Default.GOPATH, "GO-ROOT", build.Default.GOROOT, "output", string(output))
 		}
+
+		// we shoud check `pkgName` is in go.mod file, when using vendor.
+		// otherwise, `go get` should be executed for safe.
+		if c.Vendored {
+			goModFile := filepath.Join(c.AppPath, "go.mod")
+			if utils.Exists(goModFile) {
+				if realPkgName, err := utils.StripModulePath(pkgName); err == nil && !utils.ContainsString(utils.MustReadLines(goModFile), realPkgName) {
+					utils.Logger.Infof("`%s` is not in go.mod file, try `go get` again to import package", realPkgName)
+					getCmd = exec.Command(c.GoCmd, "get", "-u", pkgName) // original pkgName is compatible
+					utils.CmdInit(getCmd, !c.Vendored, c.AppPath)
+					utils.Logger.Info("Go get command ", "exec", getCmd.Path, "dir", getCmd.Dir, "args", getCmd.Args, "package", pkgName)
+					getCmd.CombinedOutput()
+				} else {
+					utils.Logger.Warn("Failed to import package", "error", err)
+				}
+			}
+		}
+
 		println(" completed.")
 
 		return nil

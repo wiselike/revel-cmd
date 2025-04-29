@@ -407,3 +407,16 @@ func findSrcPaths(appPath string, packagesList []string) (sourcePathsmap map[str
 
 	return
 }
+
+// input  "github.com/wiselike/revel-examples/chat/app"
+// return "github.com/wiselike/revel-examples"
+func StripModulePath(pkgName string) (string, error) {
+	cleanedPath := strings.TrimLeft(strings.TrimSpace(pkgName), "/")
+	parts := strings.Split(cleanedPath, "/")
+
+	if len(parts) < 3 {
+		return "", fmt.Errorf("path(%#v) too short of pkgName(`%s`), need at least 3 parts", parts, pkgName)
+	}
+
+	return strings.Join(parts[:3], "/"), nil
+}
