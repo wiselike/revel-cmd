@@ -6,9 +6,10 @@ import (
 	"go/token"
 	"testing"
 
-	"github.com/wiselike/revel-cmd/logger"
-	"github.com/wiselike/revel-cmd/model"
+	"github.com/wiselike/revel/logger"
 	"golang.org/x/tools/go/packages"
+
+	"github.com/wiselike/revel-cmd/model"
 )
 
 // helper builds a minimal SourceInfoProcessor together with

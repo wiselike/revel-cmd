@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/fsnotify/fsnotify"
+
 	"github.com/wiselike/revel-cmd/model"
 	"github.com/wiselike/revel-cmd/utils"
 )

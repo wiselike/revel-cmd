@@ -21,7 +21,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/wiselike/revel-cmd"
+	cmd "github.com/wiselike/revel-cmd"
 	"github.com/wiselike/revel-cmd/model"
 	"github.com/wiselike/revel-cmd/utils"
 )

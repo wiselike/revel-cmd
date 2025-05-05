@@ -6,10 +6,11 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/wiselike/revel-cmd/logger"
+	"github.com/wiselike/revel/logger"
+	"golang.org/x/tools/go/packages"
+
 	"github.com/wiselike/revel-cmd/model"
 	"github.com/wiselike/revel-cmd/utils"
-	"golang.org/x/tools/go/packages"
 )
 
 type (

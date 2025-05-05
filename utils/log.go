@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/wiselike/revel-cmd/logger"
 	config "github.com/wiselike/revel-config"
+	"github.com/wiselike/revel/logger"
 )
 
 var Logger = logger.New()
