@@ -373,7 +373,7 @@ func (rp *RevelContainer) vendorInitilizeLocal(modtxtPath string, revel_modules_
 
 			// Determine if we need to examine this mod, based on the list of modules being imported
 			for _, importPath := range revel_modules {
-				if strings.HasPrefix(importPath, mod.ImportPath) {
+				if importPath == mod.ImportPath || strings.HasPrefix(importPath, mod.ImportPath+"/") {
 					updateModVendorList(mod, importPath)
 				}
 			}
@@ -493,12 +493,12 @@ func updateModVendorList(mod *Mod, importPath string) {
 	pathPrefix := filepath.Join(mod.Dir, importPath[len(mod.ImportPath):])
 
 	filepath.WalkDir(pathPrefix, func(path string, d fs.DirEntry, err error) (e error) {
-		if d.IsDir() {
-			return
-		}
-
 		if err != nil {
 			utils.Logger.Crit("Failed to walk vendor dir")
+		}
+
+		if d.IsDir() {
+			return
 		}
 		utils.Logger.Info("Adding to file in vendor list", "path", path)
 		vendorList = append(vendorList, path)
