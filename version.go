@@ -4,7 +4,7 @@
 
 package cmd
 
-const (
+var (
 	// Version current Revel version
 	Version = "1.1.2"
 

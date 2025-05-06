@@ -1,7 +1,10 @@
-all:
-	go build -o ~/bin/revel -ldflags=all="-s -w" ./revel
+VERSION := $(shell git describe --tags --match 'v*' --abbrev=0 2>/dev/null || echo "v0.0.0")
+BUILD_DATE := $(shell date -u +%Y-%m-%d)
+
+release:
+	go build -o ~/bin/revel -ldflags=all="-s -w" -ldflags "-X github.com/wiselike/revel-cmd.Version=$(VERSION) -X github.com/wiselike/revel-cmd.BuildDate=$(BUILD_DATE)" ./revel
 build:
-	go build -o ~/bin/revel -gcflags=all="-N -l" ./revel
+	go build -o ~/bin/revel -gcflags=all="-N -l" -ldflags "-X github.com/wiselike/revel-cmd.Version=$(VERSION) -X github.com/wiselike/revel-cmd.BuildDate=$(BUILD_DATE)" ./revel
 fmt:
 	@if command -v goimports >/dev/null 2>&1; then \
 		goimports -local github.com/wiselike/revel-cmd -l -w . \
