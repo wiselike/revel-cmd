@@ -27,8 +27,8 @@ github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/stretchr/testify v1.7.1 h1:5TQK59W5E3v0r2duFAb7P95B6hEeOyEnHRa8MjYSMTY=
 github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
-github.com/wiselike/revel v1.3.2 h1:2giJ7DiD4vQIYAvmV9pdP+Fk4ddvbgUgX75GW0PyFJk=
-github.com/wiselike/revel v1.3.2/go.mod h1:rYZtsVJKAodUeUEsjMIrYHUZ1P8THBucOEEGEuugbcc=
+github.com/wiselike/revel v1.3.3 h1:itLyC4vYkx6cwwkzxLOrxXuL7VCyhzYKzscjcNBvtcs=
+github.com/wiselike/revel v1.3.3/go.mod h1:rYZtsVJKAodUeUEsjMIrYHUZ1P8THBucOEEGEuugbcc=
 github.com/wiselike/revel-config v1.2.0 h1:emFgHTixb54qmlfr5wSiRIG/exXLrKGv32xWsm2uMuM=
 github.com/wiselike/revel-config v1.2.0/go.mod h1:XVY82UnQ/mdB23u9AF/4ahhM1ISGctXkD/l/Qd3N/2U=
 github.com/wiselike/revel-log15 v2.14.0+incompatible h1:6MKwN0T00W7jF/1d/MZd5V8gpOLV0QScXhZ1Fl+Az7k=
