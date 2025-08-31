@@ -13,7 +13,7 @@ require (
 	github.com/jessevdk/go-flags v1.4.0
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.7.1
-	github.com/wiselike/revel v1.3.3
+	github.com/wiselike/revel v1.3.4
 	github.com/wiselike/revel-config v1.2.0
 	golang.org/x/tools v0.1.12
 )
